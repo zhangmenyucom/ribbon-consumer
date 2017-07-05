@@ -8,5 +8,10 @@ spring:
       uri: http://localhost:8088
       username: user
       password: 7cc3d4c3-9fda-48be-bb7f-6bd304c2ec57
+      retry:
+        initial-interval: 1000 #初始重试间隔
+        multiplier: 1.1 #失败后下一次重试因子
+        max-interval: 6000 #最大重试间隔
+        max-attempts: 6  #最大重试次数
 logging:
   level: info
