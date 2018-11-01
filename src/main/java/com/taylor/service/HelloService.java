@@ -1,7 +1,6 @@
 package com.taylor.service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.taylor.SearchBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,13 +17,13 @@ public class HelloService {
     private RestTemplate restTemplate;
 
     @HystrixCommand(fallbackMethod = "helloFallback")
-    public SearchBean helloService() {
-        return restTemplate.getForObject("http://SPC-TEST-CLIENT/test/hi?name=123213", SearchBean.class);
+    public String helloService() {
+        return restTemplate.getForObject("http://EUREKA-CLIENT:8080/hello/say", String.class);
 
     }
 
-    public SearchBean helloFallback() {
-        return new SearchBean();
+    public String helloFallback() {
+        return "未找到";
     }
 
 }
